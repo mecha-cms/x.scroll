@@ -2,24 +2,30 @@
 
     var selector = doc.getElementsByClassName('js:scroll'), i, j = selector.length;
 
+    function easeOutQuad(t, b, c, d) {
+        return -c * (t /= d) * (t - 2) + b;
+    } // default is `easeOutQuad`
+
     if (!j) return;
 
-    function scrollTo(el, to, speed, step, easing, callback) {
+    function scrollTo(el, to, speed, easing, callback) {
         var X = el.scrollLeft,
             Y = el.scrollTop,
             current = 0,
-            easing = easing && easing.replace(/-([a-z])/g, function($, a) {
+            step = 1000 / 60;
+        easing = Math[easing && easing.replace(/-([a-z])/g, function($, a) {
                 return a.toUpperCase(); // convert `slug-case` to `camelCase`
-            });
-        easing = easing && Math[easing] || function(t, b, c, d) {
-            return -c * Math.pow(1 - (t / d), 5) + b;
-        }; // default is `easeOut`
+            }) || ""] || easeOutQuad;
         function animate() {
             current += step;
             el.scrollLeft = easing(current, X, to[0] - X, speed);
             el.scrollTop = easing(current, Y, to[1] - Y, speed);
             if (current < speed) {
-                setTimeout(animate, step);
+                if (win.requestAnimationFrame) {
+                    win.requestAnimationFrame(animate);
+                } else {
+                    win.setTimeout(animate, step);
+                }
             } else {
                 callback && callback(el);
             }
@@ -38,8 +44,7 @@
                     section && section.offsetTop || 0
                 ],
                 +($.getAttribute('data-speed') || 400),
-                +($.getAttribute('data-step') || 20),
-                $.getAttribute('data-easing'),
+                $.getAttribute('data-easing') || "",
                 function() {
                     hash && $.getAttribute('data-hash-change') !== 'false' && (win.location.hash = hash);
                 }
