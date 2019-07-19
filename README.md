@@ -1,4 +1,4 @@
-JavaScript Scroll Plugin for Mecha
-==================================
+JavaScript Scroll Extension for Mecha
+=====================================
 
 > Smooth scrolling system.
