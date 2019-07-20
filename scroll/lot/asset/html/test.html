@@ -13,103 +13,77 @@
       color: #000;
     }
     div {
-      margin: 3000px 0;
-      height: 10px;
+      width: 50px;
+      height: 50px;
+      margin: 100% auto;
       background: #f00;
+      border-radius: 100%;
     }
     nav {
-      background: #000;
-      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
       position: fixed;
       right: 0;
       bottom: 0;
       left: 0;
       z-index: 9999;
-      padding: .5em 1em;
+      padding: .25em;
     }
     nav a {
-      color: #0ff;
+      display: inline-block;
+      margin: .25em;
+      padding: .25em .5em;
+      background: #0ff;
+      color: inherit;
       text-decoration: none;
+    }
+    nav a:first-child {
+      background: #ff0;
     }
     </style>
   </head>
   <body>
     <nav>
+      <a class="js:scroll" href="#" data-duration="0">&uarr;&uarr;&uarr;</a>
+
       <a class="js:scroll" href="#test">default</a>
-      /
       <a class="js:scroll" href="#test" data-ease="">linear</a>
 
-      /
       <a class="js:scroll" href="#test" data-ease="in">in</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-quad">in-quad</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-cubic">in-cubic</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-quart">in-quart</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-quint">in-quint</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-sine">in-sine</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-expo">in-expo</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-circ">in-circ</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-back">in-back</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-bounce" data-duration="3000">in-bounce</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-elastic" data-duration="3000">in-elastic</a>
 
-      /
       <a class="js:scroll" href="#test" data-ease="out">out</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-quad">out-quad</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-cubic">out-cubic</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-quart">out-quart</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-quint">out-quint</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-sine">out-sine</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-expo">out-expo</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-circ">out-circ</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-back">out-back</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-bounce" data-duration="3000">out-bounce</a>
-      /
       <a class="js:scroll" href="#test" data-ease="out-elastic" data-duration="3000">out-elastic</a>
 
-      /
       <a class="js:scroll" href="#test" data-ease="in-out">in-out</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-quad">in-out-quad</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-cubic">in-out-cubic</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-quart">in-out-quart</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-quint">in-out-quint</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-sine">in-out-sine</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-expo">in-out-expo</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-circ">in-out-circ</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-back">in-out-back</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-bounce" data-duration="3000">in-out-bounce</a>
-      /
       <a class="js:scroll" href="#test" data-ease="in-out-elastic" data-duration="3000">in-out-elastic</a>
-
-      /
-      <a class="js:scroll" href="#" data-duration="100">&uarr;&uarr;&uarr;</a>
     </nav>
     <div id="test"></div>
 

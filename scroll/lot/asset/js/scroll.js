@@ -3,6 +3,7 @@
     var ease = {},
         html = doc.documentElement,
         body = doc.body,
+        requestAnimationFrame = win.requestAnimationFrame,
         el = doc.getElementsByClassName('js:scroll'),
         i, j = el.length;
 
@@ -10,9 +11,13 @@
 
     // Based on <http://javascript.info/js-animation>
     function animate(timing, draw, duration, fn) {
+        if (duration <= 0) {
+            fn && fn();
+            return;
+        }
         var start = performance.now(),
             timeFraction, progress;
-        win.requestAnimationFrame(function animate(time) {
+        requestAnimationFrame(function animate(time) {
             // `timeFraction` goes from 0 to 1
             timeFraction = (time - start) / duration;
             if (timeFraction > 1) {
@@ -22,14 +27,14 @@
             progress = timing(timeFraction)
             draw(progress); // Draw it!
             if (timeFraction < 1) {
-                win.requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
             } else {
                 fn && fn();
             }
         });
     }
 
-    (function(E, M, undef) {
+    (function(E, M) {
 
         function makeOut(timing) {
             return function(timeFraction) {
@@ -46,77 +51,64 @@
             };
         }
 
-        function pow(x, timeFraction) {
+        function pow(timeFraction, x) {
             return M.pow(timeFraction, x);
         }
 
-        function linear(timeFraction) {
+        // linear (default)
+        E[""] = function(timeFraction) {
             return timeFraction;
-        }
+        };
 
-        function inSwing(timeFraction) {
+        E['in'] = function(timeFraction) {
             return -timeFraction * (timeFraction - 2);
-        }
+        };
 
-        function inQuad(timeFraction) {
-            return pow(2, timeFraction);
-        }
+        E['in-quad'] = function(timeFraction) {
+            return pow(timeFraction, 2);
+        };
 
-        function inCubic(timeFraction) {
-            return pow(3, timeFraction);
-        }
+        E['in-cubic'] = function(timeFraction) {
+            return pow(timeFraction, 3);
+        };
 
-        function inQuart(timeFraction) {
-            return pow(4, timeFraction);
-        }
+        E['in-quart'] = function(timeFraction) {
+            return pow(timeFraction, 4);
+        };
 
-        function inQuint(timeFraction) {
-            return pow(5, timeFraction);
-        }
+        E['in-quint'] = function(timeFraction) {
+            return pow(timeFraction, 5);
+        };
 
-        function inSine(timeFraction) {
+        E['in-sine'] = function(timeFraction) {
             return -M.cos(timeFraction * (M.PI / 2)) + 1;
-        }
+        };
 
-        function inExpo(timeFraction) {
-            return timeFraction === 0 ? 0 : M.pow(2, 10 * (timeFraction - 1));
-        }
+        E['in-expo'] = function(timeFraction) {
+            return timeFraction === 0 ? 0 : pow(2, 10 * (timeFraction - 1));
+        };
 
-        function inCirc(timeFraction) {
+        E['in-circ'] = function(timeFraction) {
             return -(M.sqrt(1 - (timeFraction * timeFraction)) - 1);
-        }
+        };
 
-        function inBack(timeFraction) {
+        E['in-back'] = function(timeFraction) {
             var x = 1.5; // Constant
-            return M.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
-        }
+            return pow(timeFraction, 2) * ((x + 1) * timeFraction - x);
+        };
 
-        function inBounce(timeFraction) {
+        E['in-bounce'] = function(timeFraction) {
             for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
                 if (timeFraction >= (7 - 4 * a) / 11) {
-                    return -M.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + M.pow(b, 2)
+                    return -pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + pow(b, 2);
                 }
             }
-        }
+        };
 
-        function inElastic(timeFraction) {
+        E['in-elastic'] = function(timeFraction) {
             var x = 1.5; // Constant
-            return M.pow(2, 10 * (timeFraction - 1)) * M.cos(20 * M.PI * x / 3 * timeFraction);
-        }
-
-        E[""] = linear; // linear (default)
-
-        E['in'] = inSwing;
-        E['in-quad'] = inQuad;
-        E['in-cubic'] = inCubic;
-        E['in-quart'] = inQuart;
-        E['in-quint'] = inQuint;
-        E['in-sine'] = inSine;
-        E['in-expo'] = inExpo;
-        E['in-circ'] = inCirc;
-        E['in-back'] = inBack;
-        E['in-bounce'] = inBounce;
-        E['in-elastic'] = inElastic;
+            return pow(2, 10 * (timeFraction - 1)) * M.cos(20 * M.PI * x / 3 * timeFraction);
+        };
 
         var any = [
             "",
@@ -157,7 +149,7 @@
             ease = $.getAttribute('data-ease'),
             duration = +($.getAttribute('data-duration') || 3000),
             hash = ($.hash || "").replace('#', ""),
-            change = $.getAttribute('data-hash') || hash,
+            change = $.getAttribute('data-hash'),
             section = hash && doc.getElementById(hash),
             bounds = (section || html).getBoundingClientRect(),
             args = [
@@ -166,7 +158,12 @@
                 ease,
                 duration,
                 function() {
-                    hash && change !== '0' && change !== 'false' && (win.location.hash = change);
+                    if (hash && change !== 'false' && change !== '0') {
+                        if (change && change !== 'true' && change !== '1') {
+                            hash = change.replace('#', "");
+                        }
+                        win.location.hash = hash;
+                    }
                 }
             ];
         args[0] = body;
