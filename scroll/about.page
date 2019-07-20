@@ -29,7 +29,7 @@ Option | Description
 ------ | -----------
 `duration` | The animation duration in milliseconds.
 `ease` | The [easing](http://robertpenner.com/easing "Robert Penner’s Easing Functions") type.
-`hash` | Set to `false` to disable the automatic URL hash addition once the scroll animation ends. Set to any value other than `true` and `1` so that it can be used to override the original URL hash.
+`hash` | Set to `false` to disable the automatic URL hash addition once the scroll animation ends. Set to any value other than `true` and `1` to override the original URL hash.
 
 **Example:**
 
