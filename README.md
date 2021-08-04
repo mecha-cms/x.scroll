@@ -1,4 +1,9 @@
-JavaScript Scroll Extension for Mecha
-=====================================
+JavaScript Scroll Extension for [Mecha](https://github.com/mecha-cms/mecha)
+===========================================================================
 
-> Smooth scrolling system.
+Release Notes
+-------------
+
+### main
+
+ - _None._
