@@ -8,7 +8,7 @@ version: 1.3.0
 
 alert:
   stale:
-  - 'This extension is considered obsolete. CSS now supports smooth scrolling features [natively](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) which does not require JavaScript to make it work. You may need this extension only if you need animation effects which are not supported by the `scroll-behavior` standard such as `ease-in/out-bounce` and `ease-in/out-elastic` effects. This extension was last updated to work with core version 3.0.0. Contribute to the code if you want to keep this extension working with future core versions.'
+  - 'This extension is considered obsolete. CSS now supports smooth scrolling features [natively](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) which does not require JavaScript to make it work. Use this extension only if you need animation effects which are not supported by the `scroll-behavior` standard such as `ease-in/out-bounce` and `ease-in/out-elastic` effects. This extension was last updated to work with core version 3.0.0. Contribute to the code if you want to keep this extension working with future core versions.'
 
 use:
   '.\lot\x\asset': 1
