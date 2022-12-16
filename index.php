@@ -1,3 +1,3 @@
 <?php
 
-Asset::set(__DIR__ . DS . 'lot' . DS . 'asset' . DS . 'js' . DS . 'scroll.min.js');
+Asset::set(__DIR__ . D . 'index' . (defined('TEST') && TEST ? '.' : '.min.') . 'js');
