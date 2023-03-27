@@ -10,9 +10,6 @@ version: 1.3.0
 alert:
   stale:
   - 'This extension is considered obsolete. CSS now supports smooth scrolling features [natively](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) which does not require JavaScript to make it work. Use this extension only if you need animation effects which are not supported by the `scroll-behavior` standard such as `ease-in/out-bounce` and `ease-in/out-elastic` effects. This extension was last updated to work with core version 3.0.0. Contribute to the code if you want to keep this extension compatible with future core versions.'
-
-use:
-  '.\lot\x\asset': 1
 ...
 
 This extension takes any HTML anchor elements that has a `js:scroll` class in it and then will add a click event to it,
